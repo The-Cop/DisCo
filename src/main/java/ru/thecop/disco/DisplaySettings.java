@@ -7,8 +7,12 @@ public class DisplaySettings {
 
     private int width;
 
+    //characters
     private char horizontal;
     private char vertical;
+    /**
+     * Crossing of vertical and horisontal lines
+     */
     private char cross;
     private char bottomCross;
     private char topCross;
@@ -28,6 +32,10 @@ public class DisplaySettings {
 
     private int frameSeparationLinesCount;
     private int blockSeparationLinesCount;
+
+    //valued element settings
+    private int minValueSpacing;
+    private char valueSpacingChar;
 
     public static DisplaySettings defaultSettings() {
         return new DisplaySettings()
@@ -49,7 +57,10 @@ public class DisplaySettings {
                 .setPaddingLeft(1)
                 .setPaddingRight(1)
                 .setFrameSeparationLinesCount(7)
-                .setBlockSeparationLinesCount(0);
+                .setBlockSeparationLinesCount(0)
+
+                .setMinValueSpacing(2)
+                .setValueSpacingChar(' ');
     }
     //TODO implement dos-like frames settings
 }

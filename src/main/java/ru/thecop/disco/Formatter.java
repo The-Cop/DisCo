@@ -22,9 +22,8 @@ public final class Formatter {
         if (width <= 0) {
             throw new IllegalArgumentException("width must be greater than zero");
         }
-        List<String> rows = new ArrayList<>();
         if (paragraph == null || paragraph.trim().isEmpty()) {
-            return rows;
+            return new ArrayList<>();
         }
         paragraph = paragraph.trim();
         //splitting by spaces to get separate words

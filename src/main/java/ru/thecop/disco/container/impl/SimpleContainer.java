@@ -11,6 +11,7 @@ import java.util.List;
 public class SimpleContainer implements Container {
 
     //TODO implement
+    // TODO: 07.09.2016 one-block constructor included
     @Override
     public List<Block> getBlocks() {
         //TODO implement

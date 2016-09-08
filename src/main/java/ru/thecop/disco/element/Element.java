@@ -1,5 +1,7 @@
 package ru.thecop.disco.element;
 
+import ru.thecop.disco.DisplaySettings;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,11 @@ import java.util.List;
  */
 public interface Element {
 
-    //TODO implement
-    List<String> formatToWidth(int width);
+    List<String> formatToWidth(int width, DisplaySettings displaySettings);
+
+    default void validateWidth(int width) {
+        if (width <= 0) {
+            throw new IllegalArgumentException("width must be positive");
+        }
+    }
 }

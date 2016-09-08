@@ -1,5 +1,6 @@
 package ru.thecop.disco.element.impl;
 
+import ru.thecop.disco.DisplaySettings;
 import ru.thecop.disco.Formatter;
 import ru.thecop.disco.element.Element;
 
@@ -14,9 +15,7 @@ public class SimpleElement implements Element {
     }
 
     @Override
-    public List<String> formatToWidth(int width) {
+    public List<String> formatToWidth(int width, DisplaySettings displaySettings) {
         return Formatter.formatToWidth(text, width);
     }
-
-    //TODO implement
 }

@@ -7,5 +7,6 @@ import ru.thecop.disco.container.Container;
  */
 public class Block {
 
+// TODO: 07.09.2016 create blosc interface, this class rename to SimpleBlock, interface has getElements method
     //TODO implement
 }

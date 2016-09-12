@@ -1,7 +1,7 @@
 package ru.thecop.disco.container.impl;
 
 import ru.thecop.disco.container.Container;
-import ru.thecop.disco.element.Block;
+import ru.thecop.disco.block.Block;
 
 import java.util.List;
 

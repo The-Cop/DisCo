@@ -1,6 +1,7 @@
 package ru.thecop.disco.element;
 
 import ru.thecop.disco.DisplaySettings;
+import ru.thecop.disco.block.Block;
 
 import java.util.List;
 

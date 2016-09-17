@@ -4,8 +4,9 @@ import ru.thecop.disco.DisplaySettings;
 import ru.thecop.disco.Formatter;
 import ru.thecop.disco.element.Element;
 
-import java.util.Arrays;
 import java.util.List;
+
+import static ru.thecop.disco.Util.getPadString;
 
 public class ValuedElement implements Element {
 
@@ -80,12 +81,6 @@ public class ValuedElement implements Element {
         int padLength = width - value.length() - line.length();
         String padString = getPadString(padLength, valueSpacingChar);
         return line + padString + value;
-    }
-
-    private String getPadString(int padLength, char valueSpacingChar) {
-        char[] padArray = new char[padLength];
-        Arrays.fill(padArray, valueSpacingChar);
-        return new String(padArray);
     }
 
     private String formatAsNewLine(int width, char valueSpacingChar) {

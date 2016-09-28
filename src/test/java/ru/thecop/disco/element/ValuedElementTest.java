@@ -2,20 +2,18 @@ package ru.thecop.disco.element;
 
 import org.hamcrest.collection.IsIterableContainingInOrder;
 import org.junit.Test;
-import ru.thecop.disco.AbstractDisplaySettingsTest;
-import ru.thecop.disco.element.impl.ValuedElement;
 
 import java.util.List;
 
 import static org.junit.Assert.assertThat;
 
-public class ValuedElementTest extends AbstractDisplaySettingsTest {
+public class ValuedElementTest {
 
     @Test
     public void simpleTest() {
         String text = "Some valued thing";
         String value = "value";
-        List<String> rows = new ValuedElement(text, value).formatToWidth(30, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value).buildLines(30);
         assertThat(rows, IsIterableContainingInOrder.contains("Some valued thing........value"));
     }
 
@@ -23,7 +21,7 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void simpleDashTest() {
         String text = "Some valued thing";
         String value = "value";
-        List<String> rows = new ValuedElement(text, value, 1, '-').formatToWidth(30, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value, 1, '-').buildLines(30);
         assertThat(rows, IsIterableContainingInOrder.contains("Some valued thing--------value"));
     }
 
@@ -31,7 +29,7 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void overLineTest() {
         String text = "Some valued longthingname";
         String value = "value";
-        List<String> rows = new ValuedElement(text, value).formatToWidth(17, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value).buildLines(17);
         assertThat(rows, IsIterableContainingInOrder.contains(
                 "Some valued",
                 "longthingname....",
@@ -42,7 +40,7 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void bigSpacingTest() {
         String text = "Some valued thing";
         String value = "value";
-        List<String> rows = new ValuedElement(text, value, 10, '.').formatToWidth(30, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value, 10, '.').buildLines(30);
         assertThat(rows, IsIterableContainingInOrder.contains(
                 "Some valued thing.............",
                 ".........................value"));
@@ -52,14 +50,14 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void emptyTextTest() {
         String text = "";
         String value = "value";
-        List<String> rows = new ValuedElement(text, value).formatToWidth(20, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value).buildLines(20);
         assertThat(rows, IsIterableContainingInOrder.contains("...............value"));
     }
 
     @Test
     public void nullTextTest() {
         String value = "value";
-        List<String> rows = new ValuedElement(null, value).formatToWidth(20, getDisplaySettings());
+        List<String> rows = new ValuedElement(null, value).buildLines(20);
         assertThat(rows, IsIterableContainingInOrder.contains("...............value"));
     }
 
@@ -67,14 +65,14 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void emptyValueTest() {
         String text = "Some valued thing";
         String value = "";
-        List<String> rows = new ValuedElement(text, value).formatToWidth(20, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value).buildLines(20);
         assertThat(rows, IsIterableContainingInOrder.contains("Some valued thing..."));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void nullValueTest() {
         String text = "Some valued thing";
-        List<String> rows = new ValuedElement(text, null).formatToWidth(20, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, null).buildLines(20);
         assertThat(rows, IsIterableContainingInOrder.contains("...............value"));
     }
 
@@ -82,7 +80,7 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void emptyTextAndEmptyValueTest() {
         String text = "";
         String value = "";
-        List<String> rows = new ValuedElement(text, value).formatToWidth(20, getDisplaySettings());
+        List<String> rows = new ValuedElement(text, value).buildLines(20);
         assertThat(rows, IsIterableContainingInOrder.contains("...................."));
     }
 
@@ -90,18 +88,20 @@ public class ValuedElementTest extends AbstractDisplaySettingsTest {
     public void tooSmallWidthExceptionTest() {
         String text = "Some valued thing";
         String value = "value";
-        new ValuedElement(text, value).formatToWidth(4, getDisplaySettings());
+        new ValuedElement(text, value).buildLines(4);
     }
 
     @Test(expected = IllegalStateException.class)
     public void tooBigSpacingExceptionTest() {
         String text = "Some valued thing";
         String value = "value";
-        new ValuedElement(text, value, 10, '.').formatToWidth(14, getDisplaySettings());
+        new ValuedElement(text, value, 10, '.').buildLines(14);
     }
 
     @Test(expected = IllegalStateException.class)
     public void tooSmallSpacingExceptionTest() {
-        new ValuedElement("", "", 0, '.').formatToWidth(100, getDisplaySettings());
+        new ValuedElement("", "", 0, '.').buildLines(100);
     }
+
+    // TODO: 29.09.2016 test null arguments
 }

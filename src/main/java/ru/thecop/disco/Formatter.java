@@ -14,8 +14,9 @@ public final class Formatter {
 
     /**
      * Formats given paragraph (text, line) to a number of lines (rows) that fit given width
+     *
      * @param paragraph a text to format
-     * @param width width the lines will be fit to
+     * @param width     width the lines will be fit to
      * @return a list of strings (lines), each will have length equal or less than given width.
      */
     public static List<String> formatToWidth(String paragraph, int width) {

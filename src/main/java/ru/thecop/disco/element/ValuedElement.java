@@ -1,30 +1,26 @@
-package ru.thecop.disco.element.impl;
+package ru.thecop.disco.element;
 
-import ru.thecop.disco.DisplaySettings;
+import ru.thecop.disco.DisplayBlock;
 import ru.thecop.disco.Formatter;
-import ru.thecop.disco.element.Element;
 
 import java.util.List;
 
-import static ru.thecop.disco.Util.getPadString;
+import static ru.thecop.disco.Util.charFilledString;
 
-public class ValuedElement implements Element {
+public class ValuedElement implements DisplayBlock {
 
     private String text;
     private String value;
 
     //settings
-    private int customMinValueSpacing;
-    private char customValueSpacingChar;
-
-    private boolean customized;
+    private int minValueSpacing = 2;
+    private char valueSpacingChar = '.';
 
     public ValuedElement(String text, String value, int minValueSpacing, char valueSpacingChar) {
         this.text = text;
         this.value = value;
-        this.customMinValueSpacing = minValueSpacing;
-        this.customValueSpacingChar = valueSpacingChar;
-        customized = true;
+        this.minValueSpacing = minValueSpacing;
+        this.valueSpacingChar = valueSpacingChar;
     }
 
     public ValuedElement(String text, String value) {
@@ -42,9 +38,7 @@ public class ValuedElement implements Element {
     }
 
     @Override
-    public List<String> formatToWidth(int width, DisplaySettings displaySettings) {
-        char valueSpacingChar = customized ? customValueSpacingChar : displaySettings.getValuedElementSpacingChar();
-        int minValueSpacing = customized ? customMinValueSpacing : displaySettings.getValuedElementMinValueSpacing();
+    public List<String> buildLines(int width) {
         validateSettings(minValueSpacing);
         validateForWidth(width, minValueSpacing);
 
@@ -52,7 +46,7 @@ public class ValuedElement implements Element {
 
         //trivial - no text, just add the value line
         if (formattedText.isEmpty()) {
-            formattedText.add(formatAsNewLine(width, valueSpacingChar));
+            formattedText.add(formatAsNewLine(width));
             return formattedText;
         }
         String lastRow = formattedText.get(formattedText.size() - 1);
@@ -60,31 +54,31 @@ public class ValuedElement implements Element {
         //if value fits the last row
         if (lastRow.length() + getValueLengthWithSpacing(minValueSpacing) <= width) {
             formattedText.add(formatWithExistingLine(formattedText.remove(formattedText.size() - 1),
-                    width, valueSpacingChar));
+                    width));
             return formattedText;
         } else {
             //value does not fit last row
             formattedText.add(padLineWithSpacing(formattedText.remove(formattedText.size() - 1),
-                    width, valueSpacingChar));
-            formattedText.add(formatAsNewLine(width, valueSpacingChar));
+                    width));
+            formattedText.add(formatAsNewLine(width));
             return formattedText;
         }
     }
 
-    private String padLineWithSpacing(String line, int width, char valueSpacingChar) {
+    private String padLineWithSpacing(String line, int width) {
         int padLength = width - line.length();
-        String padString = getPadString(padLength, valueSpacingChar);
+        String padString = charFilledString(padLength, valueSpacingChar);
         return line + padString;
     }
 
-    private String formatWithExistingLine(String line, int width, char valueSpacingChar) {
+    private String formatWithExistingLine(String line, int width) {
         int padLength = width - value.length() - line.length();
-        String padString = getPadString(padLength, valueSpacingChar);
+        String padString = charFilledString(padLength, valueSpacingChar);
         return line + padString + value;
     }
 
-    private String formatAsNewLine(int width, char valueSpacingChar) {
-        return formatWithExistingLine("", width, valueSpacingChar);
+    private String formatAsNewLine(int width) {
+        return formatWithExistingLine("", width);
     }
 
     private void validateForWidth(int width, int minValueSpacing) {

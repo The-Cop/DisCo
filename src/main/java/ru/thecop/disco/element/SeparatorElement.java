@@ -1,22 +1,21 @@
-package ru.thecop.disco.element.impl;
+package ru.thecop.disco.element;
 
-import ru.thecop.disco.DisplaySettings;
-import ru.thecop.disco.element.Element;
+import ru.thecop.disco.DisplayBlock;
+import ru.thecop.disco.Util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class SeparatorElement implements Element {
+import static ru.thecop.disco.Util.validateWidth;
 
-    private boolean customized;
+public class SeparatorElement implements DisplayBlock {
+
     private int linesCount;
-    private char customSeparatorElementChar;
+    private char separatorChar = '-';
 
     public SeparatorElement(int linesCount, char separatorElementChar) {
         this.linesCount = linesCount;
-        this.customSeparatorElementChar = separatorElementChar;
-        customized = true;
+        this.separatorChar = separatorElementChar;
         validateSettings();
     }
 
@@ -26,13 +25,12 @@ public class SeparatorElement implements Element {
     }
 
     @Override
-    public List<String> formatToWidth(int width, DisplaySettings displaySettings) {
+    public List<String> buildLines(int width) {
         validateWidth(width);
-        char[] array = new char[width];
-        Arrays.fill(array, customized ? customSeparatorElementChar : displaySettings.getBlockElementsSeparationChar());
         List<String> result = new ArrayList<>();
+        String line = Util.charFilledString(width, separatorChar);
         for (int i = 0; i < linesCount; i++) {
-            result.add(new String(array));
+            result.add(line);
         }
         return result;
     }

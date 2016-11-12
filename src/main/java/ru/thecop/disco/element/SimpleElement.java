@@ -1,7 +1,7 @@
 package ru.thecop.disco.element;
 
 import ru.thecop.disco.DisplayBlock;
-import ru.thecop.disco.Formatter;
+import ru.thecop.disco.LineFormatter;
 
 import java.util.List;
 
@@ -15,6 +15,6 @@ public class SimpleElement implements DisplayBlock {
 
     @Override
     public List<String> buildLines(int width) {
-        return Formatter.formatToWidth(text, width);
+        return LineFormatter.formatToWidth(text, width);
     }
 }

@@ -11,9 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class Util {
+public final class BlockFormatter {
 
-    private Util() {
+    //TODo javadoc!
+
+    private BlockFormatter() {
     }
 
     public static List<String> lineFilledList(int linesCount, String fillingLine) {
@@ -132,9 +134,9 @@ public final class Util {
     }
 
     public static String getPaddingFormat(int baseWidth, int paddingLeft, int paddingRight) {
-        return Util.charFilledString(paddingLeft, ' ')
+        return BlockFormatter.charFilledString(paddingLeft, ' ')
                 + "%-" + getWidthForChildren(baseWidth, paddingLeft, paddingRight, false) + "s"
-                + Util.charFilledString(paddingRight, ' ');
+                + BlockFormatter.charFilledString(paddingRight, ' ');
     }
 
     public static String getPaddingFormatWithBorders(int baseWidth, Padding padding, char verticalBorder) {
@@ -147,9 +149,9 @@ public final class Util {
     public static String getPaddingFormatWithBorders(int baseWidth, int paddingLeft,
                                                      int paddingRight, char verticalBorder) {
         return verticalBorder
-                + Util.charFilledString(paddingLeft, ' ')
+                + BlockFormatter.charFilledString(paddingLeft, ' ')
                 + "%-" + getWidthForChildren(baseWidth, paddingLeft, paddingRight, true) + "s"
-                + Util.charFilledString(paddingRight, ' ')
+                + BlockFormatter.charFilledString(paddingRight, ' ')
                 + verticalBorder;
     }
 
@@ -195,11 +197,11 @@ public final class Util {
             //prepare separation lines
             List<String> separation;
             if (borders != null && borders.getVertical() != null) {
-                separation = Util.createBorderedSeparation(baseWidth,
+                separation = BlockFormatter.createBorderedSeparation(baseWidth,
                         separations,
                         borders.getVertical());
             } else {
-                separation = Util.createSeparation(baseWidth, separations);
+                separation = BlockFormatter.createSeparation(baseWidth, separations);
             }
 
             //append to result each block and a separator after

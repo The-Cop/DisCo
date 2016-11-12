@@ -7,28 +7,28 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class Formatter {
+public final class LineFormatter {
 
-    private Formatter() {
+    private LineFormatter() {
     }
 
     /**
-     * Formats given paragraph (text, line) to a number of lines (rows) that fit given width
+     * Formats given line to a number of lines (rows) that fit given width
      *
-     * @param paragraph a text to format
+     * @param line a text to format
      * @param width     width the lines will be fit to
      * @return a list of strings (lines), each will have length equal or less than given width.
      */
-    public static List<String> formatToWidth(String paragraph, int width) {
+    public static List<String> formatToWidth(String line, int width) {
         if (width <= 0) {
             throw new IllegalArgumentException("width must be greater than zero");
         }
-        if (paragraph == null || paragraph.trim().isEmpty()) {
+        if (line == null || line.trim().isEmpty()) {
             return new ArrayList<>();
         }
-        paragraph = paragraph.trim();
+        line = line.trim();
         //splitting by spaces to get separate words
-        List<String> split = new ArrayList<>(Arrays.asList(paragraph.split(" ")));
+        List<String> split = new ArrayList<>(Arrays.asList(line.split(" ")));
         return formatWords(split, width);
     }
 

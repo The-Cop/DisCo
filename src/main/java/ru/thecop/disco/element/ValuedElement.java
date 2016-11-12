@@ -1,11 +1,11 @@
 package ru.thecop.disco.element;
 
 import ru.thecop.disco.DisplayBlock;
-import ru.thecop.disco.Formatter;
+import ru.thecop.disco.LineFormatter;
 
 import java.util.List;
 
-import static ru.thecop.disco.Util.charFilledString;
+import static ru.thecop.disco.BlockFormatter.charFilledString;
 
 public class ValuedElement implements DisplayBlock {
 
@@ -28,7 +28,7 @@ public class ValuedElement implements DisplayBlock {
         this.value = value;
     }
 
-    private void validateSettings(int minValueSpacing) {
+    private void validateState(int minValueSpacing) {
         if (value == null) {
             throw new IllegalArgumentException("value is null");
         }
@@ -39,10 +39,10 @@ public class ValuedElement implements DisplayBlock {
 
     @Override
     public List<String> buildLines(int width) {
-        validateSettings(minValueSpacing);
+        validateState(minValueSpacing);
         validateForWidth(width, minValueSpacing);
 
-        List<String> formattedText = Formatter.formatToWidth(text, width);
+        List<String> formattedText = LineFormatter.formatToWidth(text, width);
 
         //trivial - no text, just add the value line
         if (formattedText.isEmpty()) {

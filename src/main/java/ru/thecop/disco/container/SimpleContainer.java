@@ -1,14 +1,11 @@
 package ru.thecop.disco.container;
 
 import ru.thecop.disco.DisplayBlock;
-import ru.thecop.disco.Util;
+import ru.thecop.disco.BlockFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A container that uses the whole width of the frame (screen?)
- */
 public class SimpleContainer implements DisplayBlock {
 
     private List<DisplayBlock> blocks = new ArrayList<>();
@@ -26,7 +23,7 @@ public class SimpleContainer implements DisplayBlock {
 
     @Override
     public List<String> buildLines(int width) {
-        return Util.formatBlocks(blocks, width, settings.getSeparations(),
+        return BlockFormatter.formatBlocks(blocks, width, settings.getSeparations(),
                 settings.getPadding(), settings.getBorders());
     }
 

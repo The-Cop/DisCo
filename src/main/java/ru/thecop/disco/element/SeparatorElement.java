@@ -1,12 +1,12 @@
 package ru.thecop.disco.element;
 
 import ru.thecop.disco.DisplayBlock;
-import ru.thecop.disco.Util;
+import ru.thecop.disco.BlockFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.thecop.disco.Util.validateWidth;
+import static ru.thecop.disco.BlockFormatter.validateWidth;
 
 public class SeparatorElement implements DisplayBlock {
 
@@ -28,7 +28,7 @@ public class SeparatorElement implements DisplayBlock {
     public List<String> buildLines(int width) {
         validateWidth(width);
         List<String> result = new ArrayList<>();
-        String line = Util.charFilledString(width, separatorChar);
+        String line = BlockFormatter.charFilledString(width, separatorChar);
         for (int i = 0; i < linesCount; i++) {
             result.add(line);
         }

@@ -1,5 +1,5 @@
 package ru.thecop.disco;
 
-public enum Aligment {
+public enum Alignment {
     LEFT, RIGHT, CENTER
 }

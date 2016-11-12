@@ -20,10 +20,10 @@ public final class LineFormatter {
      *
      * @param line     a text to format
      * @param width    width the lines will be fit to
-     * @param aligment
+     * @param alignment
      * @return a list of strings (lines), each will have length equal or less than given width.
      */
-    public static List<String> formatToWidth(String line, int width, Aligment aligment) {
+    public static List<String> formatToWidth(String line, int width, Alignment alignment) {
         if (width <= 0) {
             throw new IllegalArgumentException("width must be greater than zero");
         }
@@ -34,10 +34,10 @@ public final class LineFormatter {
         line = line.trim();
         //splitting by spaces to get separate words
         List<String> split = new ArrayList<>(Arrays.asList(line.split(" ")));
-        return formatWords(split, width, aligment);
+        return formatWords(split, width, alignment);
     }
 
-    private static List<String> formatWords(List<String> words, int width, Aligment aligment) {
+    private static List<String> formatWords(List<String> words, int width, Alignment alignment) {
         LinkedList<String> rows = new LinkedList<>();
         if (words.size() == 0) {
             return rows;
@@ -51,14 +51,14 @@ public final class LineFormatter {
             iterator.remove();
         }
 
-        return rows.stream().map(row -> alignRow(row, width, aligment)).collect(Collectors.toList());
+        return rows.stream().map(row -> alignRow(row, width, alignment)).collect(Collectors.toList());
     }
 
-    private static String alignRow(String row, int width, Aligment aligment) {
-        if (aligment == null) {
+    private static String alignRow(String row, int width, Alignment alignment) {
+        if (alignment == null) {
             return row;
         }
-        switch (aligment) {
+        switch (alignment) {
             case LEFT:
                 return row;
             case RIGHT: {

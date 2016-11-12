@@ -1,6 +1,6 @@
 package ru.thecop.disco.element;
 
-import ru.thecop.disco.Aligment;
+import ru.thecop.disco.Alignment;
 import ru.thecop.disco.DisplayBlock;
 import ru.thecop.disco.LineFormatter;
 
@@ -44,7 +44,7 @@ public class ValuedElement implements DisplayBlock {
         validateState(minValueSpacing);
         validateForWidth(width, minValueSpacing);
 
-        List<String> formattedText = LineFormatter.formatToWidth(text, width, Aligment.LEFT);
+        List<String> formattedText = LineFormatter.formatToWidth(text, width, Alignment.LEFT);
 
         //trivial - no text, just add the value line
         if (formattedText.isEmpty()) {

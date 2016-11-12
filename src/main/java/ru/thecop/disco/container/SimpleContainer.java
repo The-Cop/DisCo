@@ -8,6 +8,8 @@ import java.util.List;
 
 public class SimpleContainer implements DisplayBlock {
 
+    // TODO: 12.11.2016 implement maximum width?
+
     private List<DisplayBlock> blocks = new ArrayList<>();
     private SimpleContainerSettings settings;
 

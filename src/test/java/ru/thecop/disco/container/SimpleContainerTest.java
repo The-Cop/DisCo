@@ -15,5 +15,4 @@ public class SimpleContainerTest {
     // zero width
     // negative width
     // empty blocks list
-
 }

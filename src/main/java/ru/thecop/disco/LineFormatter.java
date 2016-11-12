@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static ru.thecop.disco.BlockFormatter.getPaddingFormat;
 
 public final class LineFormatter {
 
@@ -15,24 +18,26 @@ public final class LineFormatter {
     /**
      * Formats given line to a number of lines (rows) that fit given width
      *
-     * @param line a text to format
-     * @param width     width the lines will be fit to
+     * @param line     a text to format
+     * @param width    width the lines will be fit to
+     * @param aligment
      * @return a list of strings (lines), each will have length equal or less than given width.
      */
-    public static List<String> formatToWidth(String line, int width) {
+    public static List<String> formatToWidth(String line, int width, Aligment aligment) {
         if (width <= 0) {
             throw new IllegalArgumentException("width must be greater than zero");
         }
         if (line == null || line.trim().isEmpty()) {
             return new ArrayList<>();
         }
+
         line = line.trim();
         //splitting by spaces to get separate words
         List<String> split = new ArrayList<>(Arrays.asList(line.split(" ")));
-        return formatWords(split, width);
+        return formatWords(split, width, aligment);
     }
 
-    private static List<String> formatWords(List<String> words, int width) {
+    private static List<String> formatWords(List<String> words, int width, Aligment aligment) {
         LinkedList<String> rows = new LinkedList<>();
         if (words.size() == 0) {
             return rows;
@@ -45,7 +50,38 @@ public final class LineFormatter {
             rows = formatAndAppendWord(word, width, rows);
             iterator.remove();
         }
-        return rows;
+
+        return rows.stream().map(row -> alignRow(row, width, aligment)).collect(Collectors.toList());
+    }
+
+    private static String alignRow(String row, int width, Aligment aligment) {
+        if (aligment == null) {
+            return row;
+        }
+        switch (aligment) {
+            case LEFT:
+                return row;
+            case RIGHT: {
+                int leftPadding = width - row.length();
+                if (leftPadding == 0) {
+                    return row;
+                }
+                String format = getPaddingFormat(width, leftPadding, 0);
+                return String.format(format, row);
+            }
+            case CENTER: {
+                int freeSpace = width - row.length();
+                if (freeSpace == 0) {
+                    return row;
+                }
+                int rightPadding = freeSpace / 2;
+                int leftPadding = freeSpace - rightPadding;
+                String format = getPaddingFormat(width, leftPadding, rightPadding);
+                return String.format(format, row);
+            }
+            default:
+                return row;
+        }
     }
 
     private static LinkedList<String> formatAndAppendWord(String word, int width, LinkedList<String> rows) {

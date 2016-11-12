@@ -1,5 +1,6 @@
 package ru.thecop.disco.element;
 
+import ru.thecop.disco.Aligment;
 import ru.thecop.disco.DisplayBlock;
 import ru.thecop.disco.LineFormatter;
 
@@ -9,6 +10,7 @@ import static ru.thecop.disco.BlockFormatter.charFilledString;
 
 public class ValuedElement implements DisplayBlock {
 
+    // TODO: 12.11.2016 implement maximum width?
     private String text;
     private String value;
 
@@ -42,7 +44,7 @@ public class ValuedElement implements DisplayBlock {
         validateState(minValueSpacing);
         validateForWidth(width, minValueSpacing);
 
-        List<String> formattedText = LineFormatter.formatToWidth(text, width);
+        List<String> formattedText = LineFormatter.formatToWidth(text, width, Aligment.LEFT);
 
         //trivial - no text, just add the value line
         if (formattedText.isEmpty()) {

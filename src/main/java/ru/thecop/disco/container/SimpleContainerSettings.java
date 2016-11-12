@@ -17,6 +17,7 @@ public class SimpleContainerSettings {
     public static SimpleContainerSettings invisible() {
         return new SimpleContainerSettings(new Padding(), null, null);
     }
+
     public static SimpleContainerSettings dos() {
         // TODO: 29.09.2016 implement
         return new SimpleContainerSettings(null, null, null);

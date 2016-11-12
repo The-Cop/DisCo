@@ -134,9 +134,9 @@ public final class BlockFormatter {
     }
 
     public static String getPaddingFormat(int baseWidth, int paddingLeft, int paddingRight) {
-        return BlockFormatter.charFilledString(paddingLeft, ' ')
+        return charFilledString(paddingLeft, ' ')
                 + "%-" + getWidthForChildren(baseWidth, paddingLeft, paddingRight, false) + "s"
-                + BlockFormatter.charFilledString(paddingRight, ' ');
+                + charFilledString(paddingRight, ' ');
     }
 
     public static String getPaddingFormatWithBorders(int baseWidth, Padding padding, char verticalBorder) {
@@ -149,9 +149,9 @@ public final class BlockFormatter {
     public static String getPaddingFormatWithBorders(int baseWidth, int paddingLeft,
                                                      int paddingRight, char verticalBorder) {
         return verticalBorder
-                + BlockFormatter.charFilledString(paddingLeft, ' ')
+                + charFilledString(paddingLeft, ' ')
                 + "%-" + getWidthForChildren(baseWidth, paddingLeft, paddingRight, true) + "s"
-                + BlockFormatter.charFilledString(paddingRight, ' ')
+                + charFilledString(paddingRight, ' ')
                 + verticalBorder;
     }
 
@@ -197,11 +197,11 @@ public final class BlockFormatter {
             //prepare separation lines
             List<String> separation;
             if (borders != null && borders.getVertical() != null) {
-                separation = BlockFormatter.createBorderedSeparation(baseWidth,
+                separation = createBorderedSeparation(baseWidth,
                         separations,
                         borders.getVertical());
             } else {
-                separation = BlockFormatter.createSeparation(baseWidth, separations);
+                separation = createSeparation(baseWidth, separations);
             }
 
             //append to result each block and a separator after

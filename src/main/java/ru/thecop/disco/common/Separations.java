@@ -15,15 +15,14 @@ public class Separations {
         separationChar = ' ';
     }
 
-    //// TODO: 20.11.2016 refactor to static copy method
-    public Separations(Separations other) {
-        if (other != null) {
-            this.separationLinesCount = other.separationLinesCount;
-            this.separationChar = other.separationChar;
-        } else {
-            separationLinesCount = 0;
-            separationChar = ' ';
-        }
+    public static Separations copy(Separations other) {
+        return other != null ? new Separations(other) : null;
+    }
+
+    private Separations(Separations other) {
+        separationLinesCount = 0;
+        separationChar = ' ';
+
     }
 
     public int getSeparationLinesCount() {

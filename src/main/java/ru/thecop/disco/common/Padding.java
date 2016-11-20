@@ -21,19 +21,15 @@ public class Padding {
         right = 0;
     }
 
-    //// TODO: 20.11.2016 refactor to static copy method
-    public Padding(Padding other) {
-        if (other == null) {
-            top = 0;
-            bottom = 0;
-            left = 0;
-            right = 0;
-        } else {
-            this.top = other.top;
-            this.bottom = other.bottom;
-            this.left = other.left;
-            this.right = other.right;
-        }
+    public static Padding copy(Padding other) {
+        return other != null ? new Padding(other) : null;
+    }
+
+    private Padding(Padding other) {
+        this.top = other.top;
+        this.bottom = other.bottom;
+        this.left = other.left;
+        this.right = other.right;
     }
 
     public int getTop() {

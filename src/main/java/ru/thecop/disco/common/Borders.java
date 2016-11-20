@@ -18,18 +18,14 @@ public class Borders {
         corners = new Corners();
     }
 
-    //// TODO: 20.11.2016 refactor to static copy method
-    public Borders(Borders other) {
-        if (other == null) {
-            this.vertical = null;
-            this.horizontal = null;
-            this.corners = null;
-        } else {
-            this.vertical = other.vertical;
-            this.horizontal = other.horizontal;
-            //noinspection IncompleteCopyConstructor
-            this.corners = other.getCorners() != null ? new Corners(other.getCorners()) : null;
-        }
+    public static Borders copy(Borders other) {
+        return other != null ? new Borders(other) : null;
+    }
+
+    private Borders(Borders other) {
+        this.vertical = other.vertical;
+        this.horizontal = other.horizontal;
+        this.corners = Corners.copy(other.corners);
     }
 
     public Character getVertical() {

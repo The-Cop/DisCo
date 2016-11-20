@@ -24,9 +24,9 @@ public class SimpleContainerSettings {
     }
 
     public SimpleContainerSettings(Padding padding, Separations separations, Borders borders) {
-        this.padding = new Padding(padding);
-        this.separations = new Separations(separations);
-        this.borders = new Borders(borders);
+        this.padding = padding;
+        this.separations = separations;
+        this.borders = borders;
     }
 
     public Padding getPadding() {
@@ -34,7 +34,7 @@ public class SimpleContainerSettings {
     }
 
     public SimpleContainerSettings setPadding(Padding padding) {
-        this.padding = new Padding(padding);
+        this.padding = padding;
         return this;
     }
 

@@ -11,7 +11,7 @@ import static ru.thecop.disco.BlockFormatter.validateWidth;
 public class SeparatorElement implements DisplayBlock {
 
     // TODO: 12.11.2016 implement maximum width?
-    private int linesCount;
+    private int linesCount = 1;
     private char separatorChar = '-';
 
     public SeparatorElement(int linesCount, char separatorElementChar) {
@@ -23,6 +23,9 @@ public class SeparatorElement implements DisplayBlock {
     public SeparatorElement(int linesCount) {
         this.linesCount = linesCount;
         validateSettings();
+    }
+
+    public SeparatorElement() {
     }
 
     @Override

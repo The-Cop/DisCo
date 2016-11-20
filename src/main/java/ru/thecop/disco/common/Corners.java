@@ -21,9 +21,11 @@ public class Corners {
         bottomRight = '-';
     }
 
-    //// TODO: 20.11.2016 refactor to static copy method
-    public Corners(Corners other) {
+    public static Corners copy(Corners other) {
+        return other != null ? new Corners(other) : null;
+    }
 
+    private Corners(Corners other) {
         this.topLeft = other.topLeft;
         this.topRight = other.topRight;
         this.bottomLeft = other.bottomLeft;

@@ -18,6 +18,7 @@ public class Borders {
         corners = new Corners();
     }
 
+    //// TODO: 20.11.2016 refactor to static copy method
     public Borders(Borders other) {
         if (other == null) {
             this.vertical = null;

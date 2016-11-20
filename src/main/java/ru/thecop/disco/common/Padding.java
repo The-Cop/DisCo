@@ -21,6 +21,7 @@ public class Padding {
         right = 0;
     }
 
+    //// TODO: 20.11.2016 refactor to static copy method
     public Padding(Padding other) {
         if (other == null) {
             top = 0;

@@ -15,6 +15,7 @@ public class Separations {
         separationChar = ' ';
     }
 
+    //// TODO: 20.11.2016 refactor to static copy method
     public Separations(Separations other) {
         if (other != null) {
             this.separationLinesCount = other.separationLinesCount;

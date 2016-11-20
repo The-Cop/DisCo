@@ -21,6 +21,7 @@ public class Corners {
         bottomRight = '-';
     }
 
+    //// TODO: 20.11.2016 refactor to static copy method
     public Corners(Corners other) {
 
         this.topLeft = other.topLeft;
